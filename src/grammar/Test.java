@@ -12,18 +12,15 @@ public class Test {
         for(String e: example){
             System.out.print(e);
         }
+        System.out.println();
+        System.out.println(parser.parse(example));
   
         String[] wrong = {"(", "4", "+" , "(", "(", "8", ")" };
         String[] simple = {"4", "+", "2", "/", "0", "+", "(", "4", "/", "8", ")"};
-       
+        String[]empty = {};
         
-        System.out.println(parser.parse(simple));
-        
-        System.out.println(parser.parse(example));
-       
         System.out.println(parser.parse(wrong));
-        
-        
+        System.out.println(parser.parse(simple));
+        System.out.println(parser.parse(empty));
     } 
-    
 }

@@ -7,6 +7,8 @@ public class Parser {
     
     // modify this
     public boolean parse(String[] input) {
+        if(input.length == 0) return true;
+        
         this.input = input;
         pos = 0;
         return parseExpression() && pos == input.length;
@@ -15,7 +17,6 @@ public class Parser {
     private boolean isNum(String s){
         try{
             Integer.parseInt(s);
-            System.out.println("number: " + s);
             return true;
         } catch (Exception e) {
             return false;
@@ -24,8 +25,8 @@ public class Parser {
     
     private boolean parseExpression(){
         
-        boolean more = true;
         boolean ret = parseTerm();
+        boolean more = true;
         
         while(more && pos < input.length){
             if(input[pos] == Grammar.PLUS || input[pos] == Grammar.MINUS){
@@ -39,8 +40,8 @@ public class Parser {
     
     private boolean parseTerm() {
 
-        boolean more = true;
         boolean ret = parseFactor();
+        boolean more = true;
         
         while(more && pos < input.length){
             if(input[pos] == Grammar.TIMES || input[pos] == Grammar.DIVIDE){
@@ -68,19 +69,5 @@ public class Parser {
         
         pos++;
         return ret;
-    }
-
-    private boolean parseParExpression(){
-        
-        if(pos >= input.length) return false;
-        
-        if(input[pos] == Grammar.LEFTPAR){
-            pos++;
-            boolean ret = parseExpression();
-            ret &= input[pos] == Grammar.RIGHTPAR;
-            return ret;   
-        }
-        
-        return false;
     }
 }
